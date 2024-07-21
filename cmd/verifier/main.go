@@ -35,9 +35,11 @@ func main() {
 
 	// Store the initial checksum in a memguard enclave.
 	enclave := NewEnclave()
-	enclave.storeChecksum(checksum)
+	enclave.storeBuffer(checksum)
 
 	// Rerun the checksum periodically, checking the new checksum
 	// value against the stored checksum.
-	enclave.securePeriodicCheck(testData.Path)
+	const scanInterval = 5
+	slog.Info("Scanning file", "path", testData.Path, "scanInterval", scanInterval)
+	enclave.runPeriodicCheck(testData.Path, scanInterval)
 }
