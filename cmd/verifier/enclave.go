@@ -27,10 +27,10 @@ func (e *Enclave) runPeriodicCheck(filePath string, scanInterval time.Duration) 
 			continue
 		}
 		var fileStatus = "unknown"
-		if !e.compareChecksum(currentChecksum) {
-			fileStatus = "altered"
-		} else {
+		if e.compareChecksum(currentChecksum) {
 			fileStatus = "intact"
+		} else {
+			fileStatus = "altered"
 		}
 		slog.Info("File check", "status", fileStatus)
 		time.Sleep(scanInterval * time.Second)
