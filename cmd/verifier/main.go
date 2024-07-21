@@ -24,7 +24,7 @@ func main() {
 		slog.Error("Failed to create test data", "error", err)
 		os.Exit(1)
 	}
-	slog.Info("Test data created", "Path", testData.Path)
+	slog.Info("Test data created", "path", testData.Path)
 
 	// Get the checksum of the test file as a memguard Lockfile.
 	checksum, err := calculateChecksum(testData.Path)
