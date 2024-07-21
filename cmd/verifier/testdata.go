@@ -6,17 +6,16 @@ import (
 )
 
 type TestData struct {
-	path string
+	Path string
 }
 
-func newTestData(directory string, filename string) (*TestData, error) {
+func NewTestData(directory string, filename string) (*TestData, error) {
 	path, err := createInitialFile(directory, filename)
 	if err != nil {
 		return nil, err
 	}
-
 	return &TestData{
-		path: path,
+		Path: path,
 	}, nil
 }
 
@@ -24,11 +23,9 @@ func createInitialFile(directory, filename string) (string, error) {
 	if err := os.MkdirAll(directory, 0755); err != nil {
 		return "", err
 	}
-
 	path := filepath.Join(directory, filename)
 	if err := os.WriteFile(path, []byte("Initial content"), 0644); err != nil {
 		return "", err
 	}
-
 	return path, nil
 }
